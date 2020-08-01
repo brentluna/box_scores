@@ -1,0 +1,33 @@
+.container {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date {
+  align-items: center;
+  text-align: center;
+}
+
+.button {
+  border-radius: 10px;
+  background-color: #30475e;
+  color: #fae1df;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.buttonLeft {
+  padding-right: 10px;
+}
+.buttonRight {
+  padding-left: 10px;
+}
+
+.button:hover {
+  opacity: 1;
+}

@@ -1,3 +1,5 @@
+import styles from './../../styles/DatePicker.module.css';
+
 function DatePicker({ date, setDate }) {
   const dateObj = new Date(date);
   const formattedDate = dateObj.toDateString();
@@ -7,10 +9,20 @@ function DatePicker({ date, setDate }) {
   };
 
   return (
-    <div>
-      <button onClick={() => changeDate(-1)}>&lang;</button>
-      <span>{formattedDate}</span>
-      <button onClick={() => changeDate(1)}>&rang;</button>
+    <div className={styles.container}>
+      <button
+        className={[styles.button, styles.buttonLeft].join(' ')}
+        onClick={() => changeDate(-1)}
+      >
+        &lang;
+      </button>
+      <span className={styles.date}>{formattedDate}</span>
+      <button
+        className={[styles.button, styles.buttonRight].join(' ')}
+        onClick={() => changeDate(1)}
+      >
+        &rang;
+      </button>
     </div>
   );
 }
