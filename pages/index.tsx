@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import NBA from 'nba';
 import { InferGetServerSidePropsType } from 'next';
 import { getScoreboard } from './../utils/apis/schedule';
 import Schedule from './../components/schedule/Schedule';
@@ -21,8 +20,6 @@ export default function Home(
 }
 
 export const getServerSideProps = async () => {
-  // const sched = await NBA.stats.scoreboard({ gameDate });
   const schedule = await getScoreboard();
-  console.log(schedule);
   return { props: { schedule } };
 };
