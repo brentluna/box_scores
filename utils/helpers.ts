@@ -1,6 +1,6 @@
 import { Period } from '../types';
 
-export const dateToYYYYMMDD = (date) => {
+export const dateToYYYYMMDD = (date: Date) => {
   if (date instanceof Date) {
     return [
       date.getFullYear(),
@@ -36,7 +36,14 @@ export const formatClock = (period: Period, clock: string) => {
   return `${clock} ${quarterString(period.current)}`;
 };
 
-export const formatDate = (startTimeUTC: string) => {
+export const formatFinalSting = (period: Period) => {
+  const diff = period.current - 4;
+  const endedInRegulation = diff === 0;
+  if (endedInRegulation) return 'Final';
+  return `Final(${diff} OT)`;
+};
+
+export const formatTime = (startTimeUTC: string) => {
   const date = new Date(Date.parse(startTimeUTC));
   return date.toLocaleTimeString('en-US', {
     minute: '2-digit',

@@ -9,7 +9,7 @@ export const getScoreboard = async (date = new Date()) => {
   const res = await fetch(url);
   const json = await res.json();
 
-  return formatGames(json);
+  return { games: formatGames(json), date: date.toLocaleDateString() };
 };
 
 const formatTeam = (team) => {

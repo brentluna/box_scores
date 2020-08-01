@@ -19,7 +19,11 @@
 
 import { Period, Game } from '../../types';
 import styles from './../../styles/Schedule.module.css';
-import { formatDate, formatClock } from './../../utils/helpers';
+import {
+  formatTime,
+  formatClock,
+  formatFinalSting,
+} from './../../utils/helpers';
 
 type TimeProps = Pick<
   Game,
@@ -32,9 +36,13 @@ function ScheduleTime({
   isGameActivated,
   startTimeUTC,
 }: TimeProps) {
-  const value = isGameActivated
-    ? formatClock(period, clock)
-    : formatDate(startTimeUTC);
+  let value;
+  if (isGameActivated) {
+    value = formatClock(period, clock);
+  } else {
+    const gameOver = period.current > 3;
+    value = gameOver ? formatFinalSting(period) : formatTime(startTimeUTC);
+  }
 
   return <div className={styles.timeContainer}>{value}</div>;
 }
