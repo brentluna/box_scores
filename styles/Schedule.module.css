@@ -1,19 +1,24 @@
 .teamContainer {
   display: flex;
   justify-content: space-between;
+  padding: 10px 0;
 }
 
 .itemContainer {
-  border: 1px solid grey;
   display: flex;
   justify-content: space-between;
   padding: 20px 30px;
+  border-bottom: 1px solid #fae1df;
+}
+.itemContainer:last-child {
+  border-bottom: none;
 }
 
+.scheduleListContainer {
+  border: 1x solid #fae1df;
+}
 .scheduleList {
-  list-style-type: none;
-  margin-left: 0;
-  padding: 0;
+  overflow: auto;
 }
 
 .timeContainer {

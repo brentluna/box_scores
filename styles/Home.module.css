@@ -1,4 +1,20 @@
-.container {
+.main {
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+  min-height: 100vh;
+  color: #0d1f2d;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e4c3ad;
+  padding: 30px;
+  color: #546a7b;
+}
+/* .container {
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
@@ -120,4 +136,4 @@
     width: 100%;
     flex-direction: column;
   }
-}
+} */

@@ -1,5 +1,5 @@
 import { TeamWithGameInfo } from './../../types';
-import styles from './Schedule.module.css';
+import styles from './../../styles/Schedule.module.css';
 
 function ScheduleItemTeam({ simpleName, location, score }: TeamWithGameInfo) {
   return (

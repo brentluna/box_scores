@@ -18,7 +18,7 @@
 // },
 
 import { Period, Game } from '../../types';
-import styles from './Schedule.module.css';
+import styles from './../../styles/Schedule.module.css';
 
 const quarterString = (quarter: number) => {
   if (quarter > 4) {

@@ -9,20 +9,13 @@ const gameDate = '07/31/2020';
 export default function Home(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  console.log(props);
   return (
-    <main>
-      <header>
+    <main className={styles.main}>
+      <header className={styles.header}>
         <h2>Box Scores</h2>
         <div>Date picker</div>
       </header>
-      <section>
-        <h3>Games</h3>
-        <div>
-          <Schedule schedule={props.schedule} />
-          <pre>{JSON.stringify(props, null, 2)}</pre>
-        </div>
-      </section>
+      <Schedule schedule={props.schedule} />
     </main>
   );
 }

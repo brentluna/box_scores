@@ -1,7 +1,7 @@
 import { Game } from '../../types';
 import ScheduleItemTeam from './ScheduleItemTeam';
 import ScheduleTime from './ScheduleTime';
-import styles from './Schedule.module.css';
+import styles from './../../styles/Schedule.module.css';
 
 function ScheduleItem({
   gameId,

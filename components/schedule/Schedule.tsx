@@ -1,14 +1,16 @@
 import ScheduleItem from './ScheduleItem';
 import { Game } from './../../types';
-import styles from './Schedule.module.css';
+import styles from './../../styles/Schedule.module.css';
 
 function Schedule({ schedule }: { schedule: Array<Game> }) {
   return (
-    <ul className={styles.scheduleList}>
-      {schedule.map((game: Game) => (
-        <ScheduleItem {...game} />
-      ))}
-    </ul>
+    <section className={styles.scheduleListContainer}>
+      <ul className={styles.scheduleList}>
+        {schedule.map((game: Game) => (
+          <ScheduleItem {...game} />
+        ))}
+      </ul>
+    </section>
   );
 }
 
