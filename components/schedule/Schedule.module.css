@@ -1,0 +1,27 @@
+.teamContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemContainer {
+  border: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.scheduleList {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.timeContainer {
+  width: 120px;
+  text-align: end;
+  align-self: center;
+}
+
+.teamsContainer {
+  width: 100%;
+}
