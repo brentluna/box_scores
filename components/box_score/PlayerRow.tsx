@@ -11,6 +11,14 @@ function PlayerRow({ player }: { player: PlayerStats }) {
     blocks,
     turnovers,
     plusMinus,
+    fgm,
+    fga,
+    tpm,
+    tpa,
+    offReb,
+    defReb,
+    pFouls,
+    min,
   } = player;
   return (
     <tr>
@@ -22,6 +30,12 @@ function PlayerRow({ player }: { player: PlayerStats }) {
       <td>{blocks}</td>
       <td>{turnovers}</td>
       <td>{plusMinus}</td>
+      <td>{`${fgm}/${fga}`}</td>
+      <td>{`${tpm}/${tpa}`}</td>
+      <td>{offReb}</td>
+      <td>{defReb}</td>
+      <td>{pFouls}</td>
+      <td>{min}</td>
     </tr>
   );
 }

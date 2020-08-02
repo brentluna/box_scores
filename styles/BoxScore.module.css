@@ -18,3 +18,11 @@
 .tbody tr:nth-child(odd) {
   background-color: antiquewhite;
 }
+
+.tbody {
+  overflow-y: auto;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
