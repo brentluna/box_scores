@@ -1,10 +1,28 @@
 import { getBoxscore } from './../../../utils/apis/boxscore';
 import { GetServerSideProps } from 'next';
+import BoxScore from './../../../components/box_score/BoxScore';
+import { useState } from 'react';
+import styles from './../../../styles/Game.module.css';
 
 function Game({ game }) {
+  const [isHomeTeam, setHomeTeam] = useState(true);
   return (
     <div>
-      <pre>{JSON.stringify(game, null, 2)}</pre>
+      <div className={styles.teamButtonWrapper}>
+        <button
+          onClick={() => setHomeTeam(false)}
+          className={`${styles.teamButton} ${!isHomeTeam && styles.active}`}
+        >
+          {game.vTeam.teamName}
+        </button>
+        <button
+          onClick={() => setHomeTeam(true)}
+          className={`${styles.teamButton} ${isHomeTeam && styles.active}`}
+        >
+          {game.hTeam.teamName}
+        </button>
+      </div>
+      <BoxScore team={isHomeTeam ? game.hTeam : game.vTeam} />
     </div>
   );
 }

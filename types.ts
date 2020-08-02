@@ -15,15 +15,20 @@ export interface TeamGameInfo {
 
 export type TeamWithGameInfo = Team & TeamGameInfo;
 
+export type TeamWithGameStats = TeamWithGameInfo & {
+  playerStats: Array<PlayerStats>;
+};
+
 export interface Game {
   gameId: number;
   startTimeUTC: string;
   isGameActivated: boolean;
   clock: string;
-  vTeam: TeamWithGameInfo;
-  hTeam: TeamWithGameInfo;
+  vTeam: TeamWithGameInfo | TeamWithGameStats;
+  hTeam: TeamWithGameInfo | TeamWithGameStats;
   period: Period;
 }
+export interface GameStats {}
 
 export interface Period {
   current: number;
