@@ -9,6 +9,7 @@ function BoxScore({ team }: { team: TeamWithGameStats }) {
         <thead className={styles.thead}>
           <tr>
             <th>Name</th>
+            <th>Min</th>
             <th>Pts</th>
             <th>Reb</th>
             <th>Ast</th>
@@ -21,7 +22,6 @@ function BoxScore({ team }: { team: TeamWithGameStats }) {
             <th>OffReb</th>
             <th>DefReb</th>
             <th>Fouls</th>
-            <th>Min</th>
           </tr>
         </thead>
         <tbody className={styles.tbody}>

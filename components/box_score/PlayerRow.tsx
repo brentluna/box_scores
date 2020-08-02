@@ -23,6 +23,7 @@ function PlayerRow({ player }: { player: PlayerStats }) {
   return (
     <tr>
       <td>{`${firstName.slice(0, 1)}. ${lastName}`}</td>
+      <td>{min}</td>
       <td>{points}</td>
       <td>{totReb}</td>
       <td>{assists}</td>
@@ -35,7 +36,6 @@ function PlayerRow({ player }: { player: PlayerStats }) {
       <td>{offReb}</td>
       <td>{defReb}</td>
       <td>{pFouls}</td>
-      <td>{min}</td>
     </tr>
   );
 }
