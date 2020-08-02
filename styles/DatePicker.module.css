@@ -21,6 +21,7 @@ color: #eedad1; */
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease;
+  font-weight: 900;
 }
 
 .buttonLeft {
