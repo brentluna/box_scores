@@ -12,8 +12,20 @@
   transition: all 0.4s ease;
   opacity: 0.7;
 }
+
 .teamButton.active {
   opacity: 1;
   background-color: #383e56;
   color: #eedad1;
+}
+
+.scheduleButton {
+  border-radius: 10px;
+  background-color: #f69e7b;
+  color: #383e56;
+  height: 40px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  padding: 10px;
 }

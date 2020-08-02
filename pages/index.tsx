@@ -5,6 +5,7 @@ import { getScoreboard } from './../utils/apis/schedule';
 import Schedule from './../components/schedule/Schedule';
 import { useState, useEffect, useRef } from 'react';
 import DatePicker from './../components/date_picker/DatePicker';
+import Header from '../components/header/Header';
 
 const useSchedule = (schedule) => {
   const firstUpdate = useRef(true);
@@ -35,13 +36,14 @@ export default function Home({
   const { date, setDate, games, setGames } = useSchedule(schedule);
 
   return (
-    <main className={styles.main}>
-      <header className={styles.header}>
-        <h2>Box Scores</h2>
+    <div>
+      <Header>
         <DatePicker date={date} setDate={setDate} />
-      </header>
-      <Schedule games={games} date={date} />
-    </main>
+      </Header>
+      <main className={styles.main}>
+        <Schedule games={games} date={date} />
+      </main>
+    </div>
   );
 }
 

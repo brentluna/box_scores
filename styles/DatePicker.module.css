@@ -1,8 +1,9 @@
 .container {
-  width: 250px;
+  width: 168px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 auto;
 }
 
 .date {
@@ -10,8 +11,6 @@
   text-align: center;
 }
 
-/* background-color: #383e56;
-color: #eedad1; */
 .button {
   border-radius: 10px;
   background-color: #f69e7b;
@@ -33,4 +32,14 @@ color: #eedad1; */
 
 .button:hover {
   opacity: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .button {
+    width: 30px;
+    height: 30px;
+  }
+  .container {
+    width: 150px;
+  }
 }

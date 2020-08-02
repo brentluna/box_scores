@@ -2,7 +2,7 @@ import styles from './../../styles/DatePicker.module.css';
 
 function DatePicker({ date, setDate }) {
   const dateObj = new Date(date);
-  const formattedDate = dateObj.toDateString();
+  const formattedDate = dateObj.toLocaleDateString();
   const changeDate = (byValue: number) => {
     const newDate = dateObj.setDate(dateObj.getDate() + byValue);
     setDate(new Date(newDate).toLocaleDateString());

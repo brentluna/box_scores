@@ -9,13 +9,14 @@
   justify-content: space-between;
   padding: 20px 30px;
   border-bottom: 1px solid #eedad1;
+  cursor: pointer;
 }
 .itemContainer:last-child {
   border-bottom: none;
 }
 
 .scheduleListContainer {
-  border: 1px solid #eedad1;
+  /* border: 1px solid #eedad1; */
 }
 .scheduleList {
   overflow: auto;
