@@ -12,7 +12,7 @@ export const getScoreboard = async (date = new Date()) => {
   return { games: formatGames(json), date: date.toLocaleDateString() };
 };
 
-const formatTeam = (team) => {
+export const formatTeam = (team) => {
   const { teamId, win, loss, seriesWin, seriesLoss, score } = team;
   return {
     ...teams[teamId],
@@ -24,25 +24,26 @@ const formatTeam = (team) => {
   };
 };
 
+export const formatGame = (game) => {
+  const {
+    startTimeUTC,
+    clock,
+    vTeam,
+    hTeam,
+    gameId,
+    period,
+    isGameActivated,
+  } = game;
+  return {
+    gameId,
+    isGameActivated,
+    startTimeUTC,
+    clock,
+    period,
+    vTeam: formatTeam(vTeam),
+    hTeam: formatTeam(hTeam),
+  };
+};
 const formatGames = (res): Array<Game> => {
-  return res.games.map((game) => {
-    const {
-      startTimeUTC,
-      clock,
-      vTeam,
-      hTeam,
-      gameId,
-      period,
-      isGameActivated,
-    } = game;
-    return {
-      gameId,
-      isGameActivated,
-      startTimeUTC,
-      clock,
-      period,
-      vTeam: formatTeam(vTeam),
-      hTeam: formatTeam(hTeam),
-    };
-  });
+  return res.games.map(formatGame);
 };

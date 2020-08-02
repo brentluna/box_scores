@@ -40,7 +40,7 @@ export default function Home({
         <h2>Box Scores</h2>
         <DatePicker date={date} setDate={setDate} />
       </header>
-      <Schedule games={games} />
+      <Schedule games={games} date={date} />
     </main>
   );
 }
