@@ -4,7 +4,7 @@ import { formatGame } from './schedule';
 
 export const getBoxscore = async (date: Date, gameId: string) => {
   const formattedDate = dateToYYYYMMDD(date);
-  const url = `http://data.nba.net/10s/prod/v1/${formattedDate}/${gameId}_boxscore.json`;
+  const url = `https://data.nba.net/10s/prod/v1/${formattedDate}/${gameId}_boxscore.json`;
   const res = await fetch(url);
   const json = await res.json();
 

@@ -5,7 +5,7 @@ import { Game } from './../../types';
 
 export const getScoreboard = async (date = new Date()) => {
   const formattedDate = dateToYYYYMMDD(date);
-  const url = `http://data.nba.net/10s/prod/v1/${formattedDate}/scoreboard.json`;
+  const url = `https://data.nba.net/10s/prod/v1/${formattedDate}/scoreboard.json`;
   const res = await fetch(url);
   const json = await res.json();
 
