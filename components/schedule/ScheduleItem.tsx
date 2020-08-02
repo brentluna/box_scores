@@ -30,6 +30,7 @@ function ScheduleItem({
           clock={clock}
           period={period}
           isGameActivated={isGameActivated}
+          align="end"
         />
       </li>
     </Link>

@@ -5,6 +5,7 @@ export interface Team {
   simpleName: string;
   location: string;
   teamName: string;
+  triCode?: string;
 }
 
 export interface TeamGameInfo {

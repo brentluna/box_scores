@@ -32,10 +32,30 @@
 
 .teamName {
   font-weight: 700;
-  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-right: 6px;
 }
 
 .score {
   font-weight: 800;
-  margin-top: 8px;
+}
+
+.record {
+  font-size: 12px;
+}
+
+.scoreWrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 30px;
+}
+
+.timeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-weight: 700;
+  width: 100px;
+  border: 1px solid #d4b5b0;
 }

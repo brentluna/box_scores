@@ -13,7 +13,7 @@ export const getScoreboard = async (date = new Date()) => {
 };
 
 export const formatTeam = (team) => {
-  const { teamId, win, loss, seriesWin, seriesLoss, score } = team;
+  const { teamId, win, loss, seriesWin, seriesLoss, score, triCode } = team;
   return {
     ...teams[teamId],
     win,
@@ -21,6 +21,7 @@ export const formatTeam = (team) => {
     seriesWin,
     seriesLoss,
     score,
+    triCode,
   };
 };
 

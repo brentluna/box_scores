@@ -28,13 +28,14 @@ import {
 type TimeProps = Pick<
   Game,
   'clock' | 'period' | 'isGameActivated' | 'startTimeUTC'
->;
+> & { align: 'center' | 'end' };
 
 function ScheduleTime({
   clock,
   period,
   isGameActivated,
   startTimeUTC,
+  align,
 }: TimeProps) {
   let value;
   if (isGameActivated) {
@@ -44,7 +45,11 @@ function ScheduleTime({
     value = gameOver ? formatFinalSting(period) : formatTime(startTimeUTC);
   }
 
-  return <div className={styles.timeContainer}>{value}</div>;
+  return (
+    <div className={styles.timeContainer} style={{ textAlign: align }}>
+      {value}
+    </div>
+  );
 }
 
 export default ScheduleTime;
