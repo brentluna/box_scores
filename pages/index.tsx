@@ -46,6 +46,11 @@ export default function Home({
 }
 
 export const getServerSideProps = async () => {
-  const schedule = await getScoreboard();
+  const date = new Date();
+  const utcDate = new Date(date.toUTCString());
+  utcDate.setHours(utcDate.getHours() - 8);
+  const usDate = new Date(utcDate);
+
+  const schedule = await getScoreboard(usDate);
   return { props: { schedule } };
 };
