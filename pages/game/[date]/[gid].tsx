@@ -11,7 +11,7 @@ function Game({ game }) {
 
 export default Game;
 
-export const getServerSideProps: GetServerSideProps = async ({
+export const getServerSideProps = async ({
   params,
 }: {
   params: { date: string; gid: string };
