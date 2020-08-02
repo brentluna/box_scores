@@ -10,10 +10,12 @@
   text-align: center;
 }
 
+/* background-color: #383e56;
+color: #eedad1; */
 .button {
   border-radius: 10px;
-  background-color: #30475e;
-  color: #fae1df;
+  background-color: #f69e7b;
+  color: #383e56;
   width: 40px;
   height: 40px;
   cursor: pointer;

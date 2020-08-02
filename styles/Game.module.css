@@ -1,17 +1,19 @@
 .teamButtonWrapper {
   display: flex;
   justify-content: space-between;
-  color: white;
   transition: opacity 0.4s ease;
 }
 
 .teamButton {
-  background-color: #0d1f2d;
+  background-color: #d4b5b0;
+  color: #383e56;
   width: 50%;
   height: 80px;
-  transition: opacity 0.4s ease;
+  transition: all 0.4s ease;
   opacity: 0.7;
 }
 .teamButton.active {
   opacity: 1;
+  background-color: #383e56;
+  color: #eedad1;
 }

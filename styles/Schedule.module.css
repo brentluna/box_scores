@@ -8,14 +8,14 @@
   display: flex;
   justify-content: space-between;
   padding: 20px 30px;
-  border-bottom: 3px solid #e4c3ad;
+  border-bottom: 1px solid #eedad1;
 }
 .itemContainer:last-child {
   border-bottom: none;
 }
 
 .scheduleListContainer {
-  border: 3px solid #e4c3ad;
+  border: 1px solid #eedad1;
 }
 .scheduleList {
   overflow: auto;

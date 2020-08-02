@@ -15,8 +15,12 @@
   padding: 8px 14px;
 }
 
+.table tr {
+  height: 60px;
+}
+
 .tbody tr:nth-child(odd) {
-  background-color: antiquewhite;
+  background-color: #343c5a;
 }
 
 .tbody {
