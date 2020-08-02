@@ -29,3 +29,13 @@
   transition: opacity 0.3s ease;
   padding: 10px;
 }
+
+.teamName {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.score {
+  font-weight: 800;
+  margin-top: 8px;
+}

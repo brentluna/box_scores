@@ -22,13 +22,21 @@ function Game({ game }) {
             onClick={() => setHomeTeam(false)}
             className={`${styles.teamButton} ${!isHomeTeam && styles.active}`}
           >
-            {game.vTeam.teamName}
+            <div>
+              <span className={styles.teamName}>{game.vTeam.teamName}</span>
+              <span>{`(${game.vTeam.win}-${game.vTeam.loss})`}</span>
+            </div>
+            <div className={styles.score}>{game.vTeam.score}</div>
           </button>
           <button
             onClick={() => setHomeTeam(true)}
             className={`${styles.teamButton} ${isHomeTeam && styles.active}`}
           >
-            {game.hTeam.teamName}
+            <div>
+              <span className={styles.teamName}>{game.hTeam.teamName}</span>
+              <span>{`(${game.hTeam.win}-${game.hTeam.loss})`}</span>
+            </div>
+            <div className={styles.score}>{game.hTeam.score}</div>
           </button>
         </div>
         <BoxScore team={isHomeTeam ? game.hTeam : game.vTeam} />
