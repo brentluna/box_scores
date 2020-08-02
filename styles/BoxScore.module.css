@@ -30,3 +30,15 @@
 .tableWrapper {
   overflow-x: auto;
 }
+
+@media only screen and (max-width: 600px) {
+  .table tr {
+    height: 44px;
+  }
+  .table td {
+    padding: 8px 10px;
+  }
+  .table {
+    font-size: 14px;
+  }
+}
