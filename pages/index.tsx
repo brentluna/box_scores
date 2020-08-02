@@ -37,7 +37,7 @@ export default function Home({
   schedule,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { date, setDate, games, setGames } = useSchedule(schedule);
-  const [showScores, setShowScores] = useState(false);
+  const [showScores, setShowScores] = useState(true);
 
   return (
     <div>
