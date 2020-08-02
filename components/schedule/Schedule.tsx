@@ -7,7 +7,7 @@ function Schedule({ games, date }: { games: Array<Game>; date: string }) {
     <section className={styles.scheduleListContainer}>
       <ul className={styles.scheduleList}>
         {games.map((game: Game) => (
-          <ScheduleItem {...game} date={date} />
+          <ScheduleItem {...game} date={date} key={game.gameId} />
         ))}
       </ul>
     </section>
