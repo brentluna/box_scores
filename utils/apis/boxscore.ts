@@ -13,16 +13,16 @@ export const getBoxscore = async (date: Date, gameId: string) => {
 
 const formatBoxscore = (res) => {
   const gameData = formatGame(res.basicGameData);
-  const players = playersByTeamId(res.stats.activePlayers);
-
+  const stats = res && res.stats;
   const teamKeys = ['vTeam', 'hTeam'];
 
-  console.log(players);
+  // stats isn't included in res if the game hasn't started
+  const players = stats && playersByTeamId(res.stats.activePlayers);
+
   teamKeys.forEach((key) => {
     const team = gameData[key];
-    team.playerStats = players[team.teamId];
+    team.playerStats = stats ? players[team.teamId] : [];
   });
-
   return gameData;
 };
 
