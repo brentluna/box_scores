@@ -64,6 +64,7 @@ input:checked + .slider:before {
   align-items: center;
   width: 168px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {

@@ -12,11 +12,11 @@
 }
 
 .button {
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: #f69e7b;
   color: #383e56;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease;
@@ -36,8 +36,8 @@
 
 @media only screen and (max-width: 600px) {
   .button {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
   .container {
     width: 150px;
