@@ -7,7 +7,7 @@ import Header from '../../../components/header/Header';
 import { useRouter } from 'next/router';
 
 function Game({ game }) {
-  const [isHomeTeam, setHomeTeam] = useState(true);
+  const [isHomeTeam, setHomeTeam] = useState(false);
   const router = useRouter();
   return (
     <div>
