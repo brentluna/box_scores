@@ -34,6 +34,7 @@ export const formatGame = (game) => {
     gameId,
     period,
     isGameActivated,
+    watch,
   } = game;
   return {
     gameId,
@@ -43,6 +44,9 @@ export const formatGame = (game) => {
     period,
     vTeam: formatTeam(vTeam),
     hTeam: formatTeam(hTeam),
+    natlBroadcast: watch.broadcast.broadcasters.national.map(
+      (el) => el.shortName
+    ),
   };
 };
 const formatGames = (res): Array<Game> => {

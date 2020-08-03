@@ -31,3 +31,24 @@
 .teamsContainer {
   width: 100%;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.broadcast {
+  font-size: 11px;
+  text-align: end;
+}
+
+.clockWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .timeContainer {
+    width: 98px;
+  }
+}

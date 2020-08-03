@@ -28,6 +28,7 @@ export interface Game {
   vTeam: TeamWithGameInfo | TeamWithGameStats;
   hTeam: TeamWithGameInfo | TeamWithGameStats;
   period: Period;
+  natlBroadcast?: Array<string>;
 }
 export interface GameStats {}
 

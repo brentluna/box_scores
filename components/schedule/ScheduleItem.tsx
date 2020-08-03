@@ -14,6 +14,7 @@ function ScheduleItem({
   hTeam,
   period,
   isGameActivated,
+  natlBroadcast,
 }: Game & { date: string }) {
   return (
     <Link
@@ -22,16 +23,20 @@ function ScheduleItem({
     >
       <li className={styles.itemContainer}>
         <div className={styles.teamsContainer}>
-          <ScheduleItemTeam {...vTeam} />
-          <ScheduleItemTeam {...hTeam} />
+          <ScheduleItemTeam {...vTeam} winning={vTeam.score > hTeam.score} />
+          <ScheduleItemTeam {...hTeam} winning={vTeam.score < hTeam.score} />
         </div>
-        <ScheduleTime
-          startTimeUTC={startTimeUTC}
-          clock={clock}
-          period={period}
-          isGameActivated={isGameActivated}
-          align="end"
-        />
+        <div className={styles.clockWrapper}>
+          <div className={styles.broadcast}>{natlBroadcast.join(', ')}</div>
+          <ScheduleTime
+            startTimeUTC={startTimeUTC}
+            clock={clock}
+            period={period}
+            isGameActivated={isGameActivated}
+            align="end"
+          />
+          <div />
+        </div>
       </li>
     </Link>
   );
