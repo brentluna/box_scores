@@ -14,19 +14,26 @@ const useSchedule = (schedule) => {
     new Date(schedule.date).toLocaleDateString()
   );
   const [games, setGames] = useState(schedule.games);
-
+  const updateGames = async () => {
+    const res = await getScoreboard(new Date(date));
+    setGames(res.games);
+  };
   useEffect(() => {
     // dont' fetch on mount as it' served already
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
-    const updateGames = async () => {
-      const res = await getScoreboard(new Date(date));
-      setGames(res.games);
-    };
+
     updateGames();
   }, [date]);
+
+  useEffect(() => {
+    window && window.addEventListener('focus', updateGames);
+    return () => {
+      window && window.removeEventListener('focus', updateGames);
+    };
+  }, []);
 
   return { date, setDate, games, setGames };
 };
