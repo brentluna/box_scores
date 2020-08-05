@@ -7,6 +7,12 @@ import { useState, useEffect, useRef, createContext } from 'react';
 import DatePicker from './../components/date_picker/DatePicker';
 import Header from '../components/header/Header';
 import ToggleSwitch from './../components/toggle_switch/ToggleSwitch';
+import {
+  PullToRefresh,
+  PullDownContent,
+  ReleaseContent,
+  RefreshContent,
+} from 'react-js-pull-to-refresh';
 
 const useSchedule = (schedule) => {
   const firstUpdate = useRef(true);
@@ -17,6 +23,7 @@ const useSchedule = (schedule) => {
   const updateGames = async () => {
     const res = await getScoreboard(new Date(date));
     setGames(res.games);
+    return true;
   };
   useEffect(() => {
     // dont' fetch on mount as it' served already
@@ -29,13 +36,13 @@ const useSchedule = (schedule) => {
   }, [date]);
 
   useEffect(() => {
-    window && window.addEventListener('focus', updateGames);
+    typeof window && window.addEventListener('focus', updateGames);
     return () => {
-      window && window.removeEventListener('focus', updateGames);
+      typeof window && window.removeEventListener('focus', updateGames);
     };
   }, []);
 
-  return { date, setDate, games, setGames };
+  return { date, setDate, games, setGames, updateGames };
 };
 
 export const ShowScoresContext = createContext(null);
@@ -43,26 +50,41 @@ export const ShowScoresContext = createContext(null);
 export default function Home({
   schedule,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { date, setDate, games, setGames } = useSchedule(schedule);
+  const { date, setDate, games, updateGames } = useSchedule(schedule);
   const [showScores, setShowScores] = useState(true);
 
+  const handleRefresh = () => {
+    return new Promise((resolve) => {
+      updateGames().then((res) => resolve());
+    });
+  };
   return (
-    <div>
-      <Header>
-        <div className={styles.controlsWrapper}>
-          <ToggleSwitch
-            checked={showScores}
-            onChange={() => setShowScores(!showScores)}
-          />
-          <DatePicker date={date} setDate={setDate} />
-        </div>
-      </Header>
-      <main className={styles.main}>
-        <ShowScoresContext.Provider value={showScores}>
-          <Schedule games={games} date={date} />
-        </ShowScoresContext.Provider>
-      </main>
-    </div>
+    <PullToRefresh
+      pullDownContent={<PullDownContent />}
+      releaseContent={<ReleaseContent />}
+      refreshContent={<RefreshContent />}
+      pullDownThreshold={200}
+      onRefresh={handleRefresh}
+      triggerHeight={100}
+      backgroundColor="#383e56"
+    >
+      <div>
+        <Header>
+          <div className={styles.controlsWrapper}>
+            <ToggleSwitch
+              checked={showScores}
+              onChange={() => setShowScores(!showScores)}
+            />
+            <DatePicker date={date} setDate={setDate} />
+          </div>
+        </Header>
+        <main className={styles.main}>
+          <ShowScoresContext.Provider value={showScores}>
+            <Schedule games={games} date={date} />
+          </ShowScoresContext.Provider>
+        </main>
+      </div>
+    </PullToRefresh>
   );
 }
 

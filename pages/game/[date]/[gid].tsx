@@ -6,59 +6,86 @@ import styles from './../../../styles/Game.module.css';
 import Header from '../../../components/header/Header';
 import { useRouter } from 'next/router';
 import ScheduleTime from './../../../components/schedule/ScheduleTime';
+import {
+  PullToRefresh,
+  PullDownContent,
+  ReleaseContent,
+  RefreshContent,
+} from 'react-js-pull-to-refresh';
 
-function Game({ game }) {
+function Game({ gameData, date, gid }) {
   const [isHomeTeam, setHomeTeam] = useState(false);
+  const [game, setGame] = useState(gameData);
   const router = useRouter();
+  const handleRefresh = () => {
+    return new Promise((resolve) => {
+      const dateObj = new Date(date.replace(/_/g, '/'));
+      getBoxscore(dateObj, gid).then((res) => {
+        setGame(res);
+        resolve();
+      });
+    });
+  };
   return (
-    <div>
-      <Header>
-        <button className={styles.scheduleButton} onClick={router.back}>
-          Schedule
-        </button>
-      </Header>
-      <main>
-        <div className={styles.teamButtonWrapper}>
-          <button
-            onClick={() => setHomeTeam(false)}
-            className={`${styles.teamButton} ${!isHomeTeam && styles.active}`}
-          >
-            <div className={styles.teamName}>{game.vTeam.simpleName}</div>
-            <div className={styles.scoreWrapper}>
-              <span
-                className={styles.record}
-              >{`(${game.vTeam.win}-${game.vTeam.loss})`}</span>
-              {/* <span className={styles.score}>{game.vTeam.score}</span> */}
-            </div>
+    <PullToRefresh
+      pullDownContent={<PullDownContent />}
+      releaseContent={<ReleaseContent />}
+      refreshContent={<RefreshContent />}
+      pullDownThreshold={200}
+      onRefresh={handleRefresh}
+      triggerHeight={100}
+      backgroundColor="#383e56"
+    >
+      <div>
+        <Header>
+          <button className={styles.scheduleButton} onClick={router.back}>
+            Schedule
           </button>
-          <div className={styles.timeWrapper}>
-            <ScheduleTime
-              startTimeUTC={game.startTimeUTC}
-              clock={game.clock}
-              period={game.period}
-              isGameActivated={game.isGameActivated}
-              align="center"
-            />
-            <div>
-              <span>{game.vTeam.score}</span> - <span>{game.hTeam.score}</span>
+        </Header>
+        <main>
+          <div className={styles.teamButtonWrapper}>
+            <button
+              onClick={() => setHomeTeam(false)}
+              className={`${styles.teamButton} ${!isHomeTeam && styles.active}`}
+            >
+              <div className={styles.teamName}>{game.vTeam.simpleName}</div>
+              <div className={styles.scoreWrapper}>
+                <span
+                  className={styles.record}
+                >{`(${game.vTeam.win}-${game.vTeam.loss})`}</span>
+                {/* <span className={styles.score}>{game.vTeam.score}</span> */}
+              </div>
+            </button>
+            <div className={styles.timeWrapper}>
+              <ScheduleTime
+                startTimeUTC={game.startTimeUTC}
+                clock={game.clock}
+                period={game.period}
+                isGameActivated={game.isGameActivated}
+                align="center"
+              />
+              <div>
+                <span>{game.vTeam.score}</span> -{' '}
+                <span>{game.hTeam.score}</span>
+              </div>
             </div>
+            <button
+              onClick={() => setHomeTeam(true)}
+              className={`${styles.teamButton} ${isHomeTeam && styles.active}`}
+            >
+              <div className={styles.teamName}>{game.hTeam.simpleName}</div>
+              <div className={styles.scoreWrapper}>
+                {/* <span className={styles.score}>{game.hTeam.score}</span> */}
+                <span
+                  className={styles.record}
+                >{`(${game.hTeam.win}-${game.hTeam.loss})`}</span>
+              </div>
+            </button>
           </div>
-          <button
-            onClick={() => setHomeTeam(true)}
-            className={`${styles.teamButton} ${isHomeTeam && styles.active}`}
-          >
-            <div className={styles.teamName}>{game.hTeam.simpleName}</div>
-            <div className={styles.scoreWrapper}>
-              {/* <span className={styles.score}>{game.hTeam.score}</span> */}
-              <span
-                className={styles.record}
-              >{`(${game.hTeam.win}-${game.hTeam.loss})`}</span>
-            </div>
-          </button>
-        </div>
-        <BoxScore team={isHomeTeam ? game.hTeam : game.vTeam} />
-      </main>
-    </div>
+          <BoxScore team={isHomeTeam ? game.hTeam : game.vTeam} />
+        </main>
+      </div>
+    </PullToRefresh>
   );
 }
 
@@ -72,6 +99,7 @@ export const getServerSideProps = async ({
   const { date, gid } = params;
   const dateObj = new Date(date.replace(/_/g, '/'));
 
-  const game = await getBoxscore(dateObj, gid);
-  return { props: { game } };
+  const gameData = await getBoxscore(dateObj, gid);
+
+  return { props: { gameData, gid, date } };
 };
