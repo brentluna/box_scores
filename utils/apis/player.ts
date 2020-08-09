@@ -22,3 +22,5 @@
 // )
 //   .then((r) => r.json())
 //   .then((r) => console.log(r));
+
+export const fetchPlayer = () => {};
