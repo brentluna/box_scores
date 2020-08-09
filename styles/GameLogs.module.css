@@ -42,9 +42,20 @@
     font-size: 14px;
   }
 }
-
-.nameCol {
-  font-weight: 500;
+.scheduleButton {
+  border-radius: 10px;
+  background-color: #f69e7b;
+  color: #383e56;
+  height: 40px;
   cursor: pointer;
-  text-decoration: underline;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  padding: 10px;
+}
+
+.playerDetailWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px 20px 20px;
+  font-weight: bold;
 }

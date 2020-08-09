@@ -12,6 +12,15 @@ export const dateToYYYYMMDD = (date: Date) => {
   return date;
 };
 
+export const dateToMMDDYY = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return [
+    String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0'),
+    String(date.getFullYear()).slice(2),
+  ].join('/');
+};
+
 export const quarterString = (quarter: number) => {
   if (quarter > 4) {
     return `${quarter - 4} OT`;

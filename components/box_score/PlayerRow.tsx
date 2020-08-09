@@ -1,4 +1,6 @@
 import { Game, TeamWithGameStats, PlayerStats } from './../../types';
+import Link from 'next/link';
+import styles from './../../styles/BoxScore.module.css';
 
 function PlayerRow({ player }: { player: PlayerStats }) {
   const {
@@ -22,7 +24,12 @@ function PlayerRow({ player }: { player: PlayerStats }) {
   } = player;
   return (
     <tr>
-      <td>{`${firstName.slice(0, 1)}. ${lastName}`}</td>
+      <Link href="/player/[pid]" as={`/player/${player.personId}`}>
+        <td className={styles.nameCol}>{`${firstName.slice(
+          0,
+          1
+        )}. ${lastName}`}</td>
+      </Link>
       <td>{min}</td>
       <td>{points}</td>
       <td>{totReb}</td>

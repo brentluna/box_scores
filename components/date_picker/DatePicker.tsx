@@ -13,11 +13,7 @@ function DatePicker({ date }) {
   const nextDate = changeDate(new Date(date), 1);
   return (
     <div className={styles.container}>
-      <Link
-        href={{ pathname: '/', query: { date: prevDate } }}
-        shallow={false}
-        passHref={true}
-      >
+      <Link href={{ pathname: '/', query: { date: prevDate } }}>
         <button className={[styles.button, styles.buttonLeft].join(' ')}>
           &lang;
         </button>
