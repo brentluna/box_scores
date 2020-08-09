@@ -16,6 +16,8 @@ function ScheduleItem({
   isGameActivated,
   natlBroadcast,
 }: Game & { date: string }) {
+  const homeTeamWinning =
+    Number.parseInt(hTeam.score) > Number.parseInt(vTeam.score);
   return (
     <Link
       href="/game/[date]/[gid]"
@@ -23,8 +25,8 @@ function ScheduleItem({
     >
       <li className={styles.itemContainer}>
         <div className={styles.teamsContainer}>
-          <ScheduleItemTeam {...vTeam} winning={vTeam.score > hTeam.score} />
-          <ScheduleItemTeam {...hTeam} winning={vTeam.score < hTeam.score} />
+          <ScheduleItemTeam {...vTeam} winning={!homeTeamWinning} />
+          <ScheduleItemTeam {...hTeam} winning={homeTeamWinning} />
         </div>
         <div className={styles.clockWrapper}>
           <div className={styles.broadcast}>{natlBroadcast.join(', ')}</div>
