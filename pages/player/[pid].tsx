@@ -25,9 +25,9 @@ export default Player;
 
 export const getServerSideProps = async (context) => {
   const { pid } = context.params;
-  const res = await fetch(
-    `http://${context.req.headers.host}/api/player?playerID=${pid}`
-  );
+  const url = `http://${context.req.headers.host}/api/player?playerID=${pid}`;
+  console.log('PID_URL: ', url);
+  const res = await fetch(url);
   const gameLogs = await res.json();
   return { props: { pid, gameLogs } };
 };
