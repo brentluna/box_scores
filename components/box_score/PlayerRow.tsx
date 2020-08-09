@@ -24,12 +24,13 @@ function PlayerRow({ player }: { player: PlayerStats }) {
   } = player;
   return (
     <tr>
-      <Link href="/player/[pid]" as={`/player/${player.personId}`}>
+      {/* <Link href="/player/[pid]" as={`/player/${player.personId}`}>
         <td className={styles.nameCol}>{`${firstName.slice(
           0,
           1
         )}. ${lastName}`}</td>
-      </Link>
+      </Link> */}
+      <td>{`${firstName.slice(0, 1)}. ${lastName}`}</td>
       <td>{min}</td>
       <td>{points}</td>
       <td>{totReb}</td>
