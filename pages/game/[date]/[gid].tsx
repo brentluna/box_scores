@@ -39,7 +39,7 @@ function Game({ gameData, date, gid }) {
       <div>
         <Header>
           <button className={styles.scheduleButton} onClick={router.back}>
-            Schedule
+            Back
           </button>
         </Header>
         <main>

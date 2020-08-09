@@ -15,25 +15,15 @@ import {
 } from 'react-js-pull-to-refresh';
 
 const useSchedule = (schedule) => {
-  const firstUpdate = useRef(true);
-  const [date, setDate] = useState(() =>
-    new Date(schedule.date).toLocaleDateString()
-  );
+  const { date } = schedule;
+
   const [games, setGames] = useState(schedule.games);
+
   const updateGames = async () => {
     const res = await getScoreboard(new Date(date));
     setGames(res.games);
     return true;
   };
-  useEffect(() => {
-    // dont' fetch on mount as it' served already
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-
-    updateGames();
-  }, [date]);
 
   useEffect(() => {
     typeof window && window.addEventListener('focus', updateGames);
@@ -42,16 +32,19 @@ const useSchedule = (schedule) => {
     };
   }, []);
 
-  return { date, setDate, games, setGames, updateGames };
+  return { date, games, setGames, updateGames };
 };
-
 export const ShowScoresContext = createContext(null);
 
 export default function Home({
   schedule,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { date, setDate, games, updateGames } = useSchedule(schedule);
+  const { date, games, updateGames, setGames } = useSchedule(schedule);
+
   const [showScores, setShowScores] = useState(true);
+  useEffect(() => {
+    setGames(schedule.games);
+  }, [schedule.games]);
 
   const handleRefresh = () => {
     return new Promise((resolve) => {
@@ -75,7 +68,8 @@ export default function Home({
               checked={showScores}
               onChange={() => setShowScores(!showScores)}
             />
-            <DatePicker date={date} setDate={setDate} />
+            {/* <DatePicker date={date} setDate={setDate} /> */}
+            <DatePicker date={date} />
           </div>
         </Header>
         <main className={styles.main}>
@@ -88,12 +82,17 @@ export default function Home({
   );
 }
 
-export const getServerSideProps = async () => {
-  const date = new Date();
-  const utcDate = new Date(date.toUTCString());
-  utcDate.setHours(utcDate.getHours() - 8);
-  const usDate = new Date(utcDate);
+export const getServerSideProps = async (context) => {
+  let { date } = context.query;
+  if (date) {
+    date = new Date(date.replace(/_/g, '/'));
+  } else {
+    const today = new Date();
+    const utcDate = new Date(today.toUTCString());
+    utcDate.setHours(utcDate.getHours() - 8);
+    date = new Date(utcDate);
+  }
 
-  const schedule = await getScoreboard(usDate);
+  const schedule = await getScoreboard(date);
   return { props: { schedule } };
 };

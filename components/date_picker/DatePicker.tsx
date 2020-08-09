@@ -1,28 +1,33 @@
 import styles from './../../styles/DatePicker.module.css';
+import Link from 'next/link';
 
-function DatePicker({ date, setDate }) {
+const changeDate = (dateObj: Date, byValue: number) => {
+  const newDate = new Date(dateObj.setDate(dateObj.getDate() + byValue));
+  return newDate.toLocaleDateString().replace(/\//g, '_');
+};
+
+function DatePicker({ date }) {
   const dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleDateString();
-  const changeDate = (byValue: number) => {
-    const newDate = dateObj.setDate(dateObj.getDate() + byValue);
-    setDate(new Date(newDate).toLocaleDateString());
-  };
-
+  const prevDate = changeDate(new Date(date), -1);
+  const nextDate = changeDate(new Date(date), 1);
   return (
     <div className={styles.container}>
-      <button
-        className={[styles.button, styles.buttonLeft].join(' ')}
-        onClick={() => changeDate(-1)}
+      <Link
+        href={{ pathname: '/', query: { date: prevDate } }}
+        shallow={false}
+        passHref={true}
       >
-        &lang;
-      </button>
+        <button className={[styles.button, styles.buttonLeft].join(' ')}>
+          &lang;
+        </button>
+      </Link>
       <span className={styles.date}>{formattedDate}</span>
-      <button
-        className={[styles.button, styles.buttonRight].join(' ')}
-        onClick={() => changeDate(1)}
-      >
-        &rang;
-      </button>
+      <Link href={{ pathname: '/', query: { date: nextDate } }}>
+        <button className={[styles.button, styles.buttonRight].join(' ')}>
+          &rang;
+        </button>
+      </Link>
     </div>
   );
 }

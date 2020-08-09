@@ -9,7 +9,7 @@ export interface Team {
 }
 
 export interface TeamGameInfo {
-  score: number;
+  score: string;
   seriesWin: number;
   seriesLoss: number;
 }
