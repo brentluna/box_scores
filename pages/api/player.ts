@@ -36,16 +36,23 @@ export const fetchIt = async (playerID: string) => {
     headers: myHeaders,
   };
 
-  const res = await fetch(
-    `https://stats.nba.com/stats/playergamelogs?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=${playerID}&PlusMinus=N&Rank=N&Season=2019-20&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&VsConference=&VsDivision=`,
-    requestOptions
-  );
-  const json = await res.json();
-  const data = json.resultSets.map((set) => {
-    const { headers, rowSet } = set;
-    return rowsToObjects(headers, rowSet);
-  });
-  return data;
+  try {
+    const res = await fetch(
+      `https://stats.nba.com/stats/playergamelogs?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=${playerID}&PlusMinus=N&Rank=N&Season=2019-20&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&VsConference=&VsDivision=`,
+      requestOptions
+    );
+    console.log('Stats.NBA Res:', res);
+    const json = await res.json();
+    console.log('Stats.NBA ResJSON:', json);
+    const data = json.resultSets.map((set) => {
+      const { headers, rowSet } = set;
+      return rowsToObjects(headers, rowSet);
+    });
+    return data;
+  } catch (error) {
+    console.log('fetchIt Error: ', error);
+    return {};
+  }
 };
 
 const rowsToObjects = (headers, rows) => {
