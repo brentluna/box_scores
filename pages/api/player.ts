@@ -12,10 +12,7 @@ export default async (req, res) => {
     res.json({ error });
   }
 };
-// myHeaders.append(
-//   'Cookie',
-//   'ak_bmsc=52AFCFA6D26A972381BF12D54D35E85DB81960B5FA3D00001B2E305F5EC6BA66~pl5ENDzYcpPEEW+R4apStX7SFiGTYDYi94AF66SESqdO3/KXtjHJA5HAZX8e7FlxW5csh+brsCf5Y2I+VaZ5EF+mMLdyebKpJSLU6bzFzNQa2sI8HEyDejXYAO0Udzus1Oyzb1SIxJtrV+UpfrrdZJEV9VnlpR36cJBbovAoRwA7CPXIauJtsDnZaPUyxkKR8WFKRqK9hZcz8DsfeD8jyXhrUldK8lPG5ade0CC0w1/sA=; bm_sv=187699CBDECA03751A561653AD08FB0E~2APw6CPHtNFxyYFuZcwKfajWPYD7Y7IOe6iS/sT8SDVij+mJLRovjeKOolQHQsSXZh9jhgSx+z9sFEu6hVf+60keAqDgEQ1xlCYfhIGPyBdi9mWHTTFWW/I4ow6TTQ91DQvPEYiUJJpRrVZvT8zdwA=='
-// )
+
 export const fetchIt = async (playerID: string) => {
   const myHeaders = new Headers();
   myHeaders.append('Pragma', 'no-cache');
