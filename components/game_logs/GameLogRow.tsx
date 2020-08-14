@@ -6,7 +6,7 @@ function GameLogRow({ gameLog }: { gameLog: GameLog }) {
   const { MIN, PTS, REB, AST, STL, BLK, TO, FG, FT, PF } = stats;
   return (
     <tr>
-      <td>{dateToMMDDYY(gameDate)}</td>
+      <td>{formatDate(gameDate)}</td>
       <td>{`${gameResult} ${atVs} ${oppAbbreviation}`}</td>
       <td>{score}</td>
       <td>{MIN}</td>
@@ -27,4 +27,8 @@ function GameLogRow({ gameLog }: { gameLog: GameLog }) {
   );
 }
 
+const formatDate = (date: string) => {
+  const [day, month, year] = date.split('T')[0].split('-').reverse();
+  return [day, month, year.slice(2)].join('/');
+};
 export default GameLogRow;
