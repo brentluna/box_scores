@@ -1,19 +1,18 @@
 import { TeamWithGameInfo } from './../../types';
+import { Team } from './../../new_types';
 import styles from './../../styles/Schedule.module.css';
 import { ShowScoresContext } from './../../pages/index';
 import { useContext } from 'react';
 
 function ScheduleItemTeam({
-  teamName,
-  simpleName,
-  location,
+  displayName,
   score,
   winning,
-}: TeamWithGameInfo & { winning?: boolean }) {
+}: Team & { winning?: boolean }) {
   const showScores = useContext(ShowScoresContext);
   return (
     <div className={`${styles.teamContainer} ${winning ? styles.bold : ''}`}>
-      <div>{teamName}</div>
+      <div>{displayName}</div>
       <div>{showScores && score}</div>
     </div>
   );

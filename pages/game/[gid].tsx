@@ -1,11 +1,11 @@
-import { getBoxscore } from './../../../utils/apis/boxscore';
+import { getBoxscore } from './../../utils/apis/boxscore';
 import { GetServerSideProps } from 'next';
-import BoxScore from './../../../components/box_score/BoxScore';
+import BoxScore from './../../components/box_score/BoxScore';
 import { useState } from 'react';
-import styles from './../../../styles/Game.module.css';
-import Header from '../../../components/header/Header';
+import styles from './../../styles/Game.module.css';
+import Header from '../../components/header/Header';
 import { useRouter } from 'next/router';
-import ScheduleTime from './../../../components/schedule/ScheduleTime';
+import ScheduleTime from './../../components/schedule/ScheduleTime';
 import {
   PullToRefresh,
   PullDownContent,
@@ -13,14 +13,13 @@ import {
   RefreshContent,
 } from 'react-js-pull-to-refresh';
 
-function Game({ gameData, date, gid }) {
+function Game({ gameData, gid }) {
   const [isHomeTeam, setHomeTeam] = useState(false);
   const [game, setGame] = useState(gameData);
   const router = useRouter();
   const handleRefresh = () => {
     return new Promise((resolve) => {
-      const dateObj = new Date(date.replace(/_/g, '/'));
-      getBoxscore(dateObj, gid).then((res) => {
+      getBoxscore(gid).then((res) => {
         setGame(res);
         resolve();
       });
@@ -48,22 +47,25 @@ function Game({ gameData, date, gid }) {
               onClick={() => setHomeTeam(false)}
               className={`${styles.teamButton} ${!isHomeTeam && styles.active}`}
             >
-              <div className={styles.teamName}>{game.vTeam.simpleName}</div>
+              <div className={styles.teamName}>
+                {game.vTeam.shortDisplayName}
+              </div>
               <div className={styles.scoreWrapper}>
-                <span
+                {/* <span
                   className={styles.record}
-                >{`(${game.vTeam.win}-${game.vTeam.loss})`}</span>
+                >{`(${game.vTeam.win}-${game.vTeam.loss})`}</span> */}
                 {/* <span className={styles.score}>{game.vTeam.score}</span> */}
               </div>
             </button>
             <div className={styles.timeWrapper}>
-              <ScheduleTime
+              <ScheduleTime gameStatus={game.status} align="center" />
+              {/* <ScheduleTime
                 startTimeUTC={game.startTimeUTC}
                 clock={game.clock}
                 period={game.period}
                 isGameActivated={game.isGameActivated}
                 align="center"
-              />
+              /> */}
               <div>
                 <span>{game.vTeam.score}</span> -{' '}
                 <span>{game.hTeam.score}</span>
@@ -73,16 +75,18 @@ function Game({ gameData, date, gid }) {
               onClick={() => setHomeTeam(true)}
               className={`${styles.teamButton} ${isHomeTeam && styles.active}`}
             >
-              <div className={styles.teamName}>{game.hTeam.simpleName}</div>
+              <div className={styles.teamName}>
+                {game.hTeam.shortDisplayName}
+              </div>
               <div className={styles.scoreWrapper}>
                 {/* <span className={styles.score}>{game.hTeam.score}</span> */}
-                <span
+                {/* <span
                   className={styles.record}
-                >{`(${game.hTeam.win}-${game.hTeam.loss})`}</span>
+                >{`(${game.hTeam.win}-${game.hTeam.loss})`}</span> */}
               </div>
             </button>
           </div>
-          <BoxScore team={isHomeTeam ? game.hTeam : game.vTeam} />
+          <BoxScore stats={isHomeTeam ? game.hTeam.stats : game.vTeam.stats} />
         </main>
       </div>
     </PullToRefresh>
@@ -94,12 +98,11 @@ export default Game;
 export const getServerSideProps = async ({
   params,
 }: {
-  params: { date: string; gid: string };
+  params: { gid: string };
 }) => {
-  const { date, gid } = params;
-  const dateObj = new Date(date.replace(/_/g, '/'));
+  const { gid } = params;
 
-  const gameData = await getBoxscore(dateObj, gid);
+  const gameData = await getBoxscore(gid);
 
-  return { props: { gameData, gid, date } };
+  return { props: { gameData, gid } };
 };

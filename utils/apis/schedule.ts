@@ -5,25 +5,39 @@ import { Game } from './../../types';
 
 export const getScoreboard = async (date = new Date()) => {
   const formattedDate = dateToYYYYMMDD(date);
-  const url = `https://data.nba.net/10s/prod/v1/${formattedDate}/scoreboard.json`;
+  const host =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'http://boxscores.vercel.app';
+  // const url = `https://data.nba.net/10s/prod/v1/${formattedDate}/scoreboard.json`;
+  const url = `${host}/api/schedule/${formattedDate}`;
   const res = await fetch(url);
   const json = await res.json();
 
-  return { games: formatGames(json), date: date.toLocaleDateString() };
+  return { games: json, date: date.toLocaleDateString() };
 };
 
-export const formatTeam = (team) => {
-  const { teamId, win, loss, seriesWin, seriesLoss, score, triCode } = team;
-  return {
-    ...teams[teamId],
-    win,
-    loss,
-    seriesWin,
-    seriesLoss,
-    score,
-    triCode,
-  };
-};
+// export const getScoreboard = async (date = new Date()) => {
+//   const formattedDate = dateToYYYYMMDD(date);
+//   const url = `https://data.nba.net/10s/prod/v1/${formattedDate}/scoreboard.json`;
+//   const res = await fetch(url);
+//   const json = await res.json();
+
+//   return { games: formatGames(json), date: date.toLocaleDateString() };
+// }
+
+// export const formatTeam = (team) => {
+//   const { teamId, win, loss, seriesWin, seriesLoss, score, triCode } = team;
+//   return {
+//     ...teams[teamId],
+//     win,
+//     loss,
+//     seriesWin,
+//     seriesLoss,
+//     score,
+//     triCode,
+//   };
+// };
 
 export const formatGame = (game) => {
   const {
@@ -49,6 +63,6 @@ export const formatGame = (game) => {
     ),
   };
 };
-const formatGames = (res): Array<Game> => {
-  return res.games.map(formatGame);
-};
+// const formatGames = (res): Array<Game> => {
+//   return res.games.map(formatGame);
+// };

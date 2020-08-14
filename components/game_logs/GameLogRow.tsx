@@ -1,42 +1,27 @@
-import { GameLog } from './../../types';
+import { GameLog } from './../../new_types';
 import { dateToMMDDYY } from './../../utils/helpers';
 
 function GameLogRow({ gameLog }: { gameLog: GameLog }) {
-  const {
-    GAME_DATE,
-    MATCHUP,
-    MIN,
-    PTS,
-    REB,
-    AST,
-    STL,
-    BLK,
-    TOV,
-    PLUS_MINUS,
-    FGM,
-    FGA,
-    FG3M,
-    FG3A,
-    OREB,
-    DREB,
-    PF,
-  } = gameLog;
+  const { gameDate, atVs, oppAbbreviation, score, stats, gameResult } = gameLog;
+  const { MIN, PTS, REB, AST, STL, BLK, TO, FG, FT, PF } = stats;
   return (
     <tr>
-      <td>{dateToMMDDYY(GAME_DATE)}</td>
-      <td>{MATCHUP.split(' ').slice(1).join(' ')}</td>
-      <td>{MIN.toFixed(2)}</td>
+      <td>{dateToMMDDYY(gameDate)}</td>
+      <td>{`${gameResult} ${atVs} ${oppAbbreviation}`}</td>
+      <td>{score}</td>
+      <td>{MIN}</td>
       <td>{PTS}</td>
       <td>{REB}</td>
       <td>{AST}</td>
       <td>{STL}</td>
       <td>{BLK}</td>
-      <td>{TOV}</td>
-      <td>{PLUS_MINUS}</td>
-      <td>{`${FGM}/${FGA}`}</td>
-      <td>{`${FG3M}/${FG3A}`}</td>
-      <td>{OREB}</td>
-      <td>{DREB}</td>
+      <td>{TO}</td>
+      <td>{FG}</td>
+      <td>{stats['FG%']}</td>
+      <td>{stats['3PT']}</td>
+      <td>{stats['3P%']}</td>
+      <td>{FT}</td>
+      <td>{stats['FT%']}</td>
       <td>{PF}</td>
     </tr>
   );

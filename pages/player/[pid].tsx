@@ -2,9 +2,17 @@ import styles from './../../styles/GameLogs.module.css';
 import GameLogs from './../../components/game_logs/GameLogs';
 import Header from './../../components/header/Header';
 import router from 'next/router';
-import { GameLog } from '../../types';
-function Player({ gameLogs }: { gameLogs: Array<Array<GameLog>> }) {
-  const gameLog = gameLogs[0][0];
+import { GameLog } from '../../new_types';
+import { getGameLogs } from './../../utils/apis/player';
+import player from '../api/player';
+
+function Player({
+  gameLogs,
+  playerName,
+}: {
+  gameLogs: Array<GameLog>;
+  playerName: string;
+}) {
   return (
     <div>
       <Header>
@@ -13,8 +21,7 @@ function Player({ gameLogs }: { gameLogs: Array<Array<GameLog>> }) {
         </button>
       </Header>
       <div className={styles.playerDetailWrapper}>
-        <span>{gameLog.PLAYER_NAME}</span>
-        <span>{gameLog.TEAM_NAME}</span>
+        <h3>{playerName}</h3>
       </div>
       <GameLogs gameLogs={gameLogs} />
     </div>
@@ -25,9 +32,7 @@ export default Player;
 
 export const getServerSideProps = async (context) => {
   const { pid } = context.params;
-  const url = `http://${context.req.headers.host}/api/player?playerID=${pid}`;
-  console.log('PID_URL: ', url);
-  const res = await fetch(url);
-  const gameLogs = await res.json();
-  return { props: { pid, gameLogs } };
+  const { playerName } = context.query;
+  const res = await getGameLogs(pid);
+  return { props: { gameLogs: res, playerName } };
 };

@@ -55,7 +55,9 @@
 
 .playerDetailWrapper {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 20px 20px 20px;
-  font-weight: bold;
+  justify-content: space-around;
+}
+
+.playerDetailWrapper h3 {
+  margin: 0;
 }

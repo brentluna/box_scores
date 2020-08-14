@@ -1,23 +1,4 @@
-// "clock": "",
-
-// "period": {
-//   "current": 2,
-//   "type": 0,
-//   "maxRegular": 4,
-//   "isHalftime": true,
-//   "isEndOfPeriod": true
-// },
-
-// "clock": "",
-// "period": {
-//   "current": 0,
-//   "type": 0,
-//   "maxRegular": 4,
-//   "isHalftime": false,
-//   "isEndOfPeriod": false
-// },
-
-import { Period, Game } from '../../types';
+import { GameStatus } from './../../new_types';
 import styles from './../../styles/Schedule.module.css';
 import {
   formatTime,
@@ -25,29 +6,23 @@ import {
   formatFinalSting,
 } from './../../utils/helpers';
 
-type TimeProps = Pick<
-  Game,
-  'clock' | 'period' | 'isGameActivated' | 'startTimeUTC'
-> & { align: 'center' | 'end' };
-
 function ScheduleTime({
-  clock,
-  period,
-  isGameActivated,
-  startTimeUTC,
+  gameStatus,
+  date,
   align,
-}: TimeProps) {
-  let value;
-  if (isGameActivated) {
-    value = formatClock(period, clock);
-  } else {
-    const gameOver = period.current > 3;
-    value = gameOver ? formatFinalSting(period) : formatTime(startTimeUTC);
-  }
-
+}: {
+  gameStatus: GameStatus;
+  date?: string;
+  align: 'end' | 'center';
+}) {
+  const {
+    type: { state, shortDetail },
+  } = gameStatus;
+  const preGame = state === 'pre';
   return (
     <div className={styles.timeContainer} style={{ textAlign: align }}>
-      {value}
+      {/* {preGame ? formatTime(date) : shortDetail} */}
+      {preGame ? shortDetail.split(' - ')[1] : shortDetail}
     </div>
   );
 }

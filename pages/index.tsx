@@ -68,7 +68,6 @@ export default function Home({
               checked={showScores}
               onChange={() => setShowScores(!showScores)}
             />
-            {/* <DatePicker date={date} setDate={setDate} /> */}
             <DatePicker date={date} />
           </div>
         </Header>
