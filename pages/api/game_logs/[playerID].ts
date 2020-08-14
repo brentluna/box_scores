@@ -1,5 +1,3 @@
-import { formatGame } from '../../../utils/apis/schedule';
-
 // Request URL: https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/4065635/gamelog?region=us&lang=en&contentorigin=espn
 export default async (req, res) => {
   const {

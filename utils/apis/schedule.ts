@@ -39,30 +39,30 @@ export const getScoreboard = async (date = new Date()) => {
 //   };
 // };
 
-export const formatGame = (game) => {
-  const {
-    startTimeUTC,
-    clock,
-    vTeam,
-    hTeam,
-    gameId,
-    period,
-    isGameActivated,
-    watch,
-  } = game;
-  return {
-    gameId,
-    isGameActivated,
-    startTimeUTC,
-    clock,
-    period,
-    vTeam: formatTeam(vTeam),
-    hTeam: formatTeam(hTeam),
-    natlBroadcast: watch.broadcast.broadcasters.national.map(
-      (el) => el.shortName
-    ),
-  };
-};
+// export const formatGame = (game) => {
+//   const {
+//     startTimeUTC,
+//     clock,
+//     vTeam,
+//     hTeam,
+//     gameId,
+//     period,
+//     isGameActivated,
+//     watch,
+//   } = game;
+//   return {
+//     gameId,
+//     isGameActivated,
+//     startTimeUTC,
+//     clock,
+//     period,
+//     vTeam: formatTeam(vTeam),
+//     hTeam: formatTeam(hTeam),
+//     natlBroadcast: watch.broadcast.broadcasters.national.map(
+//       (el) => el.shortName
+//     ),
+//   };
+// };
 // const formatGames = (res): Array<Game> => {
 //   return res.games.map(formatGame);
 // };
