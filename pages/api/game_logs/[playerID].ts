@@ -24,7 +24,7 @@ const makeStatsObj = (labels, stats) => {
 
 const formatGameLogs = (events, labels) => {
   return Object.values(events)
-    .map((el) => {
+    .map((el: any) => {
       const { id, stats } = el;
 
       return {
@@ -36,7 +36,7 @@ const formatGameLogs = (events, labels) => {
 };
 
 const joinEventsAndSeasonTypes = (events, seasonTypes) => {
-  const formattedEvents = Object.values(events).reduce((acc, event) => {
+  const formattedEvents = Object.values(events).reduce((acc, event: any) => {
     const {
       id,
       atVs,
