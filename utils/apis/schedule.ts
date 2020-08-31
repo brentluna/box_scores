@@ -8,7 +8,7 @@ export const getScoreboard = async (date = new Date()) => {
   const host =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'http://boxscores.vercel.app';
+      : 'https://boxscores.vercel.app';
   // const url = `https://data.nba.net/10s/prod/v1/${formattedDate}/scoreboard.json`;
   const url = `${host}/api/schedule/${formattedDate}`;
   const res = await fetch(url);

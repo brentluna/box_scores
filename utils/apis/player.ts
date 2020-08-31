@@ -2,7 +2,7 @@ export const getGameLogs = async (playerID: string) => {
   const host =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'http://boxscores.vercel.app';
+      : 'https://boxscores.vercel.app';
   const url = `${host}/api/game_logs/${playerID}`;
   const res = await fetch(url);
   const json = await res.json();

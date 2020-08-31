@@ -4,7 +4,7 @@ export const getBoxscore = async (gameID: string) => {
   const host =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'http://boxscores.vercel.app';
+      : 'https://boxscores.vercel.app';
   const url = `${host}/api/box_score/${gameID}`;
   const res = await fetch(url);
   const json = await res.json();
