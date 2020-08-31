@@ -61,7 +61,7 @@ const joinEventsAndSeasonTypes = (events, seasonTypes) => {
   }, {});
   seasonTypes.forEach((st) => {
     st.categories.forEach((cat) => {
-      cat.events.forEach((event) => {
+      (cat.events || []).forEach((event) => {
         const { stats, eventId } = event;
         formattedEvents[eventId] = { ...formattedEvents[eventId], stats };
       });
