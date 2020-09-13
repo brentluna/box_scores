@@ -40,7 +40,8 @@ const dateIsToday = (date: string) => {
       formattedStr += el;
     }
   });
-  const todayDate = new Date().toLocaleDateString();
+  // const todayDate = new Date().toLocaleDateString();
+  const todayDate = todayPSTDate().toLocaleDateString();
   // const passedDate = new Date(
   //   Date.parse(formattedStr + 'T00:00:00')
   // ).toLocaleDateString();
@@ -54,6 +55,13 @@ const parsePassedDate = (input: string) => {
   const parts = input.match(/(\d+)/g);
   // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
   return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])); // months are 0-based
+};
+
+const todayPSTDate = (): Date => {
+  var date = new Date();
+  var utcDate = new Date(date.toUTCString());
+  utcDate.setHours(utcDate.getHours() - 8);
+  var usDate = new Date(utcDate);
 };
 
 const formatGame = (game) => {
