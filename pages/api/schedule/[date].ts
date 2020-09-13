@@ -6,15 +6,20 @@ export default async (req, res) => {
   const {
     query: { date },
   } = req;
-  const url = `https://secure.espn.com/core/nba/schedule${
-    date ? `/_/date/${date}` : ''
-  }?xhr=1&render=true&device=desktop&country=us&lang=en&region=us&site=espn&edition-host=espn.com&site-type=full`;
+  // const url = `https://secure.espn.com/core/nba/schedule${
+  // date ? `/_/date/${date}` : ''
+  // }?xhr=1&render=true&device=desktop&country=us&lang=en&region=us&site=espn&edition-host=espn.com&site-type=full`;
+
+  const url =
+    'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
   const resp = await fetch(url);
   const data = await resp.json();
-  const {
-    content: { schedule },
-  } = data;
-  const games = schedule[date].games;
+  // const {
+  //   content: { schedule },
+  // } = data;
+  // const games = schedule[date].games;
+  const games = data.events;
+
   const formattedGames = games.map((game) => formatGame(game));
   res.statusCode = 200;
   res.json(formattedGames);
