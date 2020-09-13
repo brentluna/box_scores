@@ -51,9 +51,9 @@ const dateIsToday = (date: string) => {
 };
 
 const parsePassedDate = (input: string) => {
-  var parts = input.match(/(\d+)/g);
+  const parts = input.match(/(\d+)/g);
   // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-  return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
+  return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])); // months are 0-based
 };
 
 const formatGame = (game) => {
