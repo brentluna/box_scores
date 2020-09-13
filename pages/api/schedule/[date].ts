@@ -61,7 +61,7 @@ const todayPSTDate = (): Date => {
   var date = new Date();
   var utcDate = new Date(date.toUTCString());
   utcDate.setHours(utcDate.getHours() - 8);
-  var usDate = new Date(utcDate);
+  return new Date(utcDate);
 };
 
 const formatGame = (game) => {
