@@ -45,6 +45,7 @@ const dateIsToday = (date: string) => {
     Date.parse(formattedStr + 'T00:00:00')
   ).toLocaleDateString();
 
+  console.log({ todayDate, passedDate });
   return todayDate === passedDate;
 };
 
