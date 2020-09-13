@@ -41,12 +41,19 @@ const dateIsToday = (date: string) => {
     }
   });
   const todayDate = new Date().toLocaleDateString();
-  const passedDate = new Date(
-    Date.parse(formattedStr + 'T00:00:00')
-  ).toLocaleDateString();
+  // const passedDate = new Date(
+  //   Date.parse(formattedStr + 'T00:00:00')
+  // ).toLocaleDateString();
+  const passedDate = parsePassedDate(formattedStr).toLocaleDateString();
 
   console.log({ todayDate, passedDate });
   return todayDate === passedDate;
+};
+
+const parsePassedDate = (input: string) => {
+  var parts = input.match(/(\d+)/g);
+  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+  return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
 };
 
 const formatGame = (game) => {
